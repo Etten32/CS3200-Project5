@@ -68,3 +68,43 @@
  * int nodes
  *      The number of nodes currently in the Trie
  * */
+
+#include <iostream>
+#include <vector>
+#include "TrieNode.h"
+
+using namespace std;
+class Trie{
+    public:                                                         //-------------------------------------------------------------------
+    Trie();                                                         //defualt constructor
+
+    ~Trie();                                                        //deconstructor
+
+    int count();                                                    //get the number of words in the Trie
+
+    int getSize();                                                  //get the size or number of nodes in the Trie
+    
+    bool find(string toFind);                                       //find if a given word exists in the Trie
+
+    int completeCount(string wordPart);                             //function to count the number of words that start with given prefix
+
+    vector<string> complete(string wordPart);                       //function to return a vector of words that start with given prefix
+
+    bool insert(string toInsert);                                   //function to insert a word into the Trie
+
+    void clearBelow(TrieNode* nodeAt);                              //recursive function to delete all nodes below this one non-inclusive
+
+    private:                                                        //-------------------------------------------------------------------
+    bool findH(string toFind, TrieNode* nodeAt);                    //recursive helper function for Trie::find()
+
+    vector<string> completeH(string wordPart, TrieNode* nodeAt);    //recursive helper function for Trie::complete()
+
+    bool insertH(string toFind, TrieNode* nodeAt);                  //recursive helper function for Trie::insert()
+    
+    ;                                                               //-------------------------------------------------------------------
+    TrieNode* root;                                                 //baseNode of Trie
+
+    int words;                                                      //number of words in Trie
+    
+    int nodes;                                                      //number of nodes in Trie
+};

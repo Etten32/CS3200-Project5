@@ -31,6 +31,12 @@
  * *v*v*v*v* PRIVATE: *v*v*v*v*
  * bool isEnd
  *      To signify if this node is the end of a word
+ * 
  * TrieNode[26] letterArray
  *      An array of pointers to other nodes, one for each alaphabet letter
  * */
+class TrieNode{
+    bool isEnd;
+    TrieNode* letters[26];              //syntax help obtained from family member
+    //for(int i = 0; i < 26; i++) letters[i] = nullptr;
+};
