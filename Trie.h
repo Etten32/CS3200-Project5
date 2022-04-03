@@ -35,6 +35,9 @@
  * vector<string> complete(string wordPart)
  *      Postcondition: returns vector full of all the words that start with Trie::complete().wordPart
  *      Dependancies: Trie::completeH()
+ *   
+ * outputTrie(ostream& os)
+ *      Postcondition: prints out properties of Trie to os
  * 
  * MUTATION: FUNCTIONS:
  * bool insert(string toInsert)
@@ -71,7 +74,8 @@
 
 #include <iostream>
 #include <vector>
-#include "TrieNode.h"
+#pragma once
+#include "TrieNode.cpp"
 
 using namespace std;
 class Trie{
@@ -89,6 +93,8 @@ class Trie{
     int completeCount(string wordPart);                             //function to count the number of words that start with given prefix
 
     vector<string> complete(string wordPart);                       //function to return a vector of words that start with given prefix
+
+    void outputTrie(ostream& os);                                   //prints out 'this' properties to os
 
     bool insert(string toInsert);                                   //function to insert a word into the Trie
 
