@@ -1,5 +1,4 @@
 // J+M+J
-#pragma once
 #include "TrieNode.h"
 
 TrieNode::TrieNode(){

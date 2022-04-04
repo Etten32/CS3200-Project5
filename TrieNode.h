@@ -70,4 +70,5 @@ class TrieNode{
     private:
     bool isEnd;
     TrieNode* letters[26];              //syntax help obtained from family member
+    int subTreeWords;                   // number of words in the subtree (inclusive of node)
 };

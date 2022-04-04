@@ -75,7 +75,7 @@
 #include <iostream>
 #include <vector>
 #pragma once
-#include "TrieNode.cpp"
+#include "TrieNode.h"
 
 using namespace std;
 class Trie{

@@ -1,5 +1,4 @@
 //J+M+J
-#pragma once
 #include "Trie.h"
 Trie::Trie(){//defualt constructor
     this->root = new TrieNode();
@@ -13,7 +12,7 @@ Trie::~Trie(){//deconstructor
 }                                                        
 
 int Trie::count(){//get the number of words in the Trie
-    return this->words;
+    return this->words; //* GET WORDS OF ROOT INSTEAD -- FIX!!
 }                                                    
 
 int Trie::getSize(){//get the size or number of nodes in the Trie
@@ -21,7 +20,7 @@ int Trie::getSize(){//get the size or number of nodes in the Trie
 }                                                  
 
 bool Trie::find(string toFind){//find if a given word exists in the Trie
-
+    return this->findH(toFind, this->root);
 }                                       
 
 int Trie::completeCount(string wordPart){//function to count the number of words that start with given prefix
@@ -62,7 +61,7 @@ bool Trie::insertH(string toInsert, TrieNode* nodeAt){//recursive helper functio
     //Base Case-0: toInsert is empty and this word has not been inserted (there is no endWord mark) -- mark node as endOfWord
     if(toInsert.size() == 0 && !nodeAt->isEndOfWord()){ // help for string functions obtained from: https://www.tutorialspoint.com/how-to-convert-string-to-char-array-in-cplusplus
         nodeAt->markAsEnd();
-        this->words += 1;
+        this->words += 1;   //* INSERT RECURSIVELY UP THE TREE, UPDATE THE NODES INSTEAD -- FIX!!!!
         return true;
     }
     //Base Case-1: toInsert is empty and this has been inserted (there is an endWord mark) -- return false
