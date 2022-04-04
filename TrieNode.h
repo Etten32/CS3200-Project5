@@ -17,8 +17,11 @@
  * TrieNode* getLetter(int i)
  *      Postcondition: returns this->letter[i]
  * 
+ * int getWordsAt()
+ *      Postcondition: returns this->words
+ * 
  * bool isEndOfWord()
- *      Postcondition: return isEnd
+ *      Postcondition: return this->isEnd
  * 
  * bool checkOcupation(char checkFor)
  *      Postcondition: returns true if TrieNode::checkOcupation().checkFor pointer in 'this' is already ocupied
@@ -27,6 +30,9 @@
  * MUTATION: FUNCTIONS:
  * void markAsEnd()
  *      Postcondition: marks this->isEnd as true
+ * 
+ * void addWordToSubtree()
+ *      Postcondition: adds one to TrieNode.words (words in subtree of this node)
  * 
  * TrieNode* getPToLetter(char letter)
  *      Postcondition: returns pointer to node that matches this->letters[] index of TrieNode->letter - 'a'
@@ -57,9 +63,13 @@ class TrieNode{
 
     TrieNode* getLetter(int i);
 
+    int getWordsAt();
+
     bool isEndOfWord();
 
     void markAsEnd();
+
+    void addWordToSubtree();
 
     bool checkOcupation(char checkFor);
 
@@ -70,5 +80,5 @@ class TrieNode{
     private:
     bool isEnd;
     TrieNode* letters[26];              //syntax help obtained from family member
-    int subTreeWords;                   // number of words in the subtree (inclusive of node)
+    int words;                   // number of words in the subtree (inclusive of node)
 };

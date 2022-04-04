@@ -110,7 +110,7 @@ class Trie{
     ;                                                               //-------------------------------------------------------------------
     TrieNode* root;                                                 //baseNode of Trie
 
-    int words;                                                      //number of words in Trie
+    //int words;                                                      //number of words in Trie     //* DEPRECATED
     
     int nodes;                                                      //number of nodes in Trie
 };

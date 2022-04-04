@@ -2,7 +2,7 @@
 #include "Trie.h"
 Trie::Trie(){//defualt constructor
     this->root = new TrieNode();
-    this->words = 0;
+    //this->words = 0; //* DEPRECATED
     this->nodes = 1;
 }                                                         
 
@@ -12,7 +12,8 @@ Trie::~Trie(){//deconstructor
 }                                                        
 
 int Trie::count(){//get the number of words in the Trie
-    return this->words; //* GET WORDS OF ROOT INSTEAD -- FIX!!
+    //return this->words; //* DEPRECATED
+    return root->getWordsAt();
 }                                                    
 
 int Trie::getSize(){//get the size or number of nodes in the Trie
@@ -44,7 +45,7 @@ void Trie::clearBelow(TrieNode* nodeAt){//recursive function to delete all nodes
     for(int i = 0; i < 26; i++){
         clearBelow(nodeAt->getLetter(i));
     }
-    if(nodeAt->isEndOfWord()) this->words -= 1; //if it's a word ending, subtract from the total number of words
+    //if(nodeAt->isEndOfWord()) this->words -= 1; //if it's a word ending, subtract from the total number of words //* DEPRECATED
     delete(nodeAt);
     this->nodes -= 1;
 }                              
@@ -61,7 +62,7 @@ bool Trie::insertH(string toInsert, TrieNode* nodeAt){//recursive helper functio
     //Base Case-0: toInsert is empty and this word has not been inserted (there is no endWord mark) -- mark node as endOfWord
     if(toInsert.size() == 0 && !nodeAt->isEndOfWord()){ // help for string functions obtained from: https://www.tutorialspoint.com/how-to-convert-string-to-char-array-in-cplusplus
         nodeAt->markAsEnd();
-        this->words += 1;   //* INSERT RECURSIVELY UP THE TREE, UPDATE THE NODES INSTEAD -- FIX!!!!
+        nodeAt->addWordToSubtree();
         return true;
     }
     //Base Case-1: toInsert is empty and this has been inserted (there is an endWord mark) -- return false
@@ -70,7 +71,13 @@ bool Trie::insertH(string toInsert, TrieNode* nodeAt){//recursive helper functio
     //Recursive Case-0: there is already a node pointing to the next letter
     if(nodeAt->checkOcupation(toInsert[0])){
         // if there is only one letter, recursive call with an empty string
-        if(toInsert.size() == 1) return insertH("", nodeAt->getPToLetter(toInsert[0]));
+        if(toInsert.size() == 1){
+            if(insertH("", nodeAt->getPToLetter(toInsert[0]))){
+                nodeAt->addWordToSubtree();
+                return true;
+            }
+            else return false;
+        } 
         // call again sending it the node corrasponding with the letter and the word minus the first letter
         return insertH(toInsert.substr(1,toInsert.size() - 1), nodeAt->getPToLetter(toInsert[0])); // help for .substr() obtained from: https://www.geeksforgeeks.org/substring-in-cpp/
     }
@@ -80,13 +87,21 @@ bool Trie::insertH(string toInsert, TrieNode* nodeAt){//recursive helper functio
     nodeAt->addNodeAt(toInsert[0], toAdd);
     this->nodes += 1;
     // if there was only one letter, recursive call with an empty string
-    if(toInsert.size() == 1) return insertH("", toAdd);
+    if(toInsert.size() == 1){ 
+        if(insertH("", toAdd)){
+            nodeAt->addWordToSubtree();
+            return true;
+        }
+    }
     // else call it on a substring passing it the new node
-    return insertH(toInsert.substr(1,toInsert.size() - 1), toAdd);
+    else if(insertH(toInsert.substr(1,toInsert.size() - 1), toAdd)){
+        nodeAt->addWordToSubtree();
+        return true;
+    }
 }                  
 
 void Trie::outputTrie(ostream& os){
     os << "TRIE: " << endl;
     os << "\tNODES: " << this->nodes << endl;
-    os << "\tWORDS:" << this->words << endl;
+    os << "\tWORDS:" << this->root->getWordsAt() << endl;
 }
