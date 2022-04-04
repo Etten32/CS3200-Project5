@@ -32,7 +32,7 @@ vector<string> Trie::complete(string wordPart){//function to return a vector of 
 }                       
 
 bool Trie::insert(string toInsert){//function to insert a word into the Trie
-    this->insertH(toInsert, root);
+    return this->insertH(toInsert, root);
 }                                   
 
 void Trie::clearBelow(TrieNode* nodeAt){//recursive function to delete all nodes below this one non-inclusive
