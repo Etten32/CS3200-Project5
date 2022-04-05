@@ -29,7 +29,7 @@
  *                     else returns false
  *      Dependancies: Trie::findH()
  * 
- * int completeCount(string wordPart) - RECURSIVE IMPLEMENTATION
+ * int completeCount(string wordPart)
  *      Postcondition: returns number of words starting with Trie::completeCount().wordPart
  * 
  * vector<string> complete(string wordPart)
@@ -108,7 +108,6 @@ class Trie{
     bool insertH(string toFind, TrieNode* nodeAt);                  //recursive helper function for Trie::insert()
     
     ;                                                               //-------------------------------------------------------------------
-    public:
     TrieNode* root;                                                 //baseNode of Trie
 
     //int words;                                                      //number of words in Trie     //* DEPRECATED

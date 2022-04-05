@@ -9,10 +9,17 @@ class TestHarness{
     public:
     void static testTries(){
         // comment any one to remove testing
+        cout << "==================================================" << endl << endl;
         TestHarness::testConstructor();
+        cout << "==================================================" << endl << endl;
         TestHarness::testGetters();
+        cout << "==================================================" << endl << endl;
         TestHarness::testInsert();
-        TestHarness::testClear();
+        cout << "==================================================" << endl << endl;
+        //TestHarness::testClear();
+        //cout << "==================================================" << endl << endl;
+        TestHarness::testCompleteCount();
+        cout << "==================================================" << endl << endl;
     }
     private:
     void static testConstructor(){
@@ -98,7 +105,7 @@ class TestHarness{
         testTrie->insert("a");
         testTrie->insert("i");
         cout << "3 NODES: " << testTrie->getSize() << endl;
-        testTrie->clearFrom(testTrie->root);
+        //testTrie->clearFrom(testTrie->root);
         cout << "0 NODES: " << testTrie->getSize() << endl;
         testTrie->insert("test");
         cout << "0 NODES: " << testTrie->getSize() << endl;
@@ -106,5 +113,32 @@ class TestHarness{
         cout << endl;
 
         delete(testTrie);
+    }
+    void static testCompleteCount(){
+        Trie* testTrie = new Trie();
+
+        cout << "TESTING COMPLETECOUNT()" << endl;
+
+        // testing Trie::completeCount()
+        testTrie->insert("a");
+        testTrie->insert("an");
+        testTrie->insert("ant");
+        testTrie->insert("anti");
+
+        cout << " --- TEST-0: CALLING COMPLETECOUNT --- " << endl;
+        cout << "Expected: 2" << endl;
+        cout << "Recieved: " << testTrie->completeCount("ant") << endl;
+
+        testTrie->insert("anteater");
+        cout << " --- TEST-1: CALLING COMPLETECOUNT --- " << endl;
+        cout << "Expected: 3" << endl;
+        cout << "Recieved: " << testTrie->completeCount("ant") << endl;
+
+        testTrie->insert("alps");
+        cout << " --- TEST-2: CALLING COMPLETECOUNT --- " << endl;
+        cout << "Expected: 6" << endl;
+        cout << "Recieved: " << testTrie->completeCount("a") << endl;
+
+        cout << endl;
     }
 };

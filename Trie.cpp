@@ -25,7 +25,14 @@ bool Trie::find(string toFind){//find if a given word exists in the Trie
 }                                       
 
 int Trie::completeCount(string wordPart){//function to count the number of words that start with given prefix
-
+    TrieNode* nodeAt = this->root;
+    while(nodeAt != nullptr && wordPart.size() != 0){
+        // go to first letter node
+        nodeAt = nodeAt->getPToLetter(wordPart[0]);
+        wordPart = wordPart.substr(1,wordPart.size() - 1);
+    }
+    if(nodeAt != nullptr) return nodeAt->getWordsAt();
+    return 0;
 }                             
 
 vector<string> Trie::complete(string wordPart){//function to return a vector of words that start with given prefix
