@@ -44,7 +44,7 @@
  *      Postcondition: //* DOCUMENTATION NEEDED
  *      Dependancies: Trie::insertH()
  * 
- * void clearBelow(TrieNode* nodeAt) - RECURSIVE IMPLEMENTATION
+ * void clearFrom(TrieNode* nodeAt) - RECURSIVE IMPLEMENTATION
  *      Postcondition: //* DOCUMENTATION NEEDED
  * 
  * *v*v*v*v* PRIVATE: *v*v*v*v*
@@ -98,7 +98,7 @@ class Trie{
 
     bool insert(string toInsert);                                   //function to insert a word into the Trie
 
-    void clearBelow(TrieNode* nodeAt);                              //recursive function to delete all nodes below this one non-inclusive
+    void clearFrom(TrieNode* nodeAt);                              //recursive function to delete all nodes below this one non-inclusive
 
     private:                                                        //-------------------------------------------------------------------
     bool findH(string toFind, TrieNode* nodeAt);                    //recursive helper function for Trie::find()
@@ -108,9 +108,12 @@ class Trie{
     bool insertH(string toFind, TrieNode* nodeAt);                  //recursive helper function for Trie::insert()
     
     ;                                                               //-------------------------------------------------------------------
+    public:
     TrieNode* root;                                                 //baseNode of Trie
 
     //int words;                                                      //number of words in Trie     //* DEPRECATED
     
     int nodes;                                                      //number of nodes in Trie
+
+    bool rootCleared = false;
 };

@@ -7,8 +7,8 @@ Trie::Trie(){//defualt constructor
 }                                                         
 
 Trie::~Trie(){//deconstructor
-    clearBelow(root);
-    delete(root);
+// if root is not cleared, clear tree, else skip as there is no root to clear at
+    if(!rootCleared) clearFrom(root);
 }                                                        
 
 int Trie::count(){//get the number of words in the Trie
@@ -33,17 +33,20 @@ vector<string> Trie::complete(string wordPart){//function to return a vector of 
 }                       
 
 bool Trie::insert(string toInsert){//function to insert a word into the Trie
-    return this->insertH(toInsert, root);
+    // if root is not cleared, call recursive insert, else skip as there is no root to insert at
+    if(!rootCleared) return this->insertH(toInsert, root);
 }                                   
 
-void Trie::clearBelow(TrieNode* nodeAt){//recursive function to delete all nodes below this one non-inclusive
+void Trie::clearFrom(TrieNode* nodeAt){//recursive function to delete all nodes below this one non-inclusive
+    if(nodeAt == this->root) this->rootCleared = true;
+
     //Base Case: nodeAt is nullptr
     if(nodeAt == nullptr) return;
 
     //Recursive Case: nodeAt is not nullptr
     //call clearBelow on all subtrees and delete node
     for(int i = 0; i < 26; i++){
-        clearBelow(nodeAt->getLetter(i));
+        clearFrom(nodeAt->getLetter(i));
     }
     //if(nodeAt->isEndOfWord()) this->words -= 1; //if it's a word ending, subtract from the total number of words //* DEPRECATED
     delete(nodeAt);
@@ -79,7 +82,11 @@ bool Trie::insertH(string toInsert, TrieNode* nodeAt){//recursive helper functio
             else return false;
         } 
         // call again sending it the node corrasponding with the letter and the word minus the first letter
-        return insertH(toInsert.substr(1,toInsert.size() - 1), nodeAt->getPToLetter(toInsert[0])); // help for .substr() obtained from: https://www.geeksforgeeks.org/substring-in-cpp/
+        if(insertH(toInsert.substr(1,toInsert.size() - 1), nodeAt->getPToLetter(toInsert[0]))){ // help for .substr() obtained from: https://www.geeksforgeeks.org/substring-in-cpp/
+            nodeAt->addWordToSubtree();
+            return true;
+        } 
+        else return false;
     }
 
     //Recursive Case-1: there is no node pointing to the next letter

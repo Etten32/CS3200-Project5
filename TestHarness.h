@@ -8,9 +8,11 @@ using namespace std;
 class TestHarness{
     public:
     void static testTries(){
-        // uncomment any one to remove testing
+        // comment any one to remove testing
         TestHarness::testConstructor();
+        TestHarness::testGetters();
         TestHarness::testInsert();
+        TestHarness::testClear();
     }
     private:
     void static testConstructor(){
@@ -56,5 +58,53 @@ class TestHarness{
         testTrie->outputTrie(cout);
         
         cout << endl << endl;
+        delete(testTrie);
+    }
+    void static testGetters(){
+        Trie* testTrie0 = new Trie();
+        Trie* testTrie1 = new Trie();
+
+        cout << "TESTING GETTERS" << endl;
+
+        // testing Trie::count()
+        cout << " --- CALLING COUNT(): # OF WORDS --- " << endl;
+        cout << "EMPTY: " << testTrie0->count() << endl;
+        testTrie0->insert("a");
+        cout << "1 WORD: " << testTrie0->count() << endl;
+        testTrie0->insert("be");
+        testTrie0->insert("ah");
+        cout << "3 WORDS: " << testTrie0->count() << endl;
+        cout << endl;
+
+        // testing Trie::getSize()
+        cout << " --- CALLING GETSIZE(): # OF NODES --- " << endl;
+        cout << "1 NODE: " << testTrie1->getSize() << endl;
+        testTrie1->insert("a");
+        cout << "2 NODES: " << testTrie1->getSize() << endl;
+        testTrie1->insert("be");
+        testTrie1->insert("ah");
+        cout << "5 NODES: " << testTrie1->getSize() << endl;
+        cout << endl;
+
+        delete(testTrie0);
+        delete(testTrie1);
+    }
+    void static testClear(){
+        // testing Trie::clear()
+        Trie* testTrie = new Trie();
+
+        cout << " --- TESTING CLEAR() --- " << endl;
+        cout << "1 NODE: " << testTrie->getSize() << endl;
+        testTrie->insert("a");
+        testTrie->insert("i");
+        cout << "3 NODES: " << testTrie->getSize() << endl;
+        testTrie->clearFrom(testTrie->root);
+        cout << "0 NODES: " << testTrie->getSize() << endl;
+        testTrie->insert("test");
+        cout << "0 NODES: " << testTrie->getSize() << endl;
+
+        cout << endl;
+
+        delete(testTrie);
     }
 };
