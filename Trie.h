@@ -41,23 +41,23 @@
  * 
  * MUTATION: FUNCTIONS:
  * bool insert(string toInsert)
- *      Postcondition: //* DOCUMENTATION NEEDED
+ *      Postcondition: returns true on successful insert into Trie and false on unsuccessful insert
  *      Dependancies: Trie::insertH()
  * 
  * void clearFrom(TrieNode* nodeAt) - RECURSIVE IMPLEMENTATION
- *      Postcondition: //* DOCUMENTATION NEEDED
+ *      Postcondition: deletes/clears from this node and down starting at bottom and moving to top
  * 
  * *v*v*v*v* PRIVATE: *v*v*v*v*
  * INFORMATION: FUNCTIONS:
- * bool findH(string toFind, TrieNode* nodeAt)
- *      Postcondition: //* DOCUMENTATION NEEDED
+ * bool findH(string toFind, TrieNode* nodeAt) - RECURSIVE IMPLEMENTATION
+ *      Postcondition: returns true if Trie::findH().toFind is in Trie::findH().nodeAt's subtree inclusively and false otherwise
  * 
- * vector<string> completeH(string appender, TrieNode* nodeAt) ///USE THIS->VECTOR + RECURSIVE VECTOR TO GET VECTOR
- *      Postcondition: //* DOCUMENTATION NEEDED
+ * vector<string> completeH(string appender, TrieNode* nodeAt)- RECURSIVE IMPLEMENTATION
+ *      Postcondition: returns a vector containing all words in subtree of Trie::completeH().nodeAt inclusive that start with the word in Trie::completeH().appender
  * 
  * MUTATION: FUNCTIONS:
- * bool insertH(string toFind, TrieNode* nodeAt)
- *      Postcondition: //* DOCUMENTATION NEEDED
+ * bool insertH(string toInsert, TrieNode* nodeAt) - RECURSIVE IMPLEMENTATION
+ *      Postcondition: inserts the string Trie::insertH().toInsert into the trie of Trie::insertH().nodeAt recursively and returns true of successful, false if otherwise
  * 
  * -<=>-<=>-<=>-<=>-<=>-<=>-<=>-<=>-<=>-<=>-<=>-<=>-
  * VARIABLES:

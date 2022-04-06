@@ -150,6 +150,7 @@ bool Trie::insertH(string toInsert, TrieNode* nodeAt){//recursive helper functio
         nodeAt->addWordToSubtree();
         return true;
     }
+    return false;//*CHECK
 }                  
 
 void Trie::outputTrie(ostream& os){

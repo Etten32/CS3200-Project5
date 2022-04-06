@@ -7,11 +7,14 @@
  * *v*v*v*v* PUBLIC: *v*v*v*v*
  * CONSTRUCTORS:
  * TrieNode()
- *      Postcondition: //* DOCUMENTATION NEEDED
+ *      Postcondition: the following is initialized:
+ *                      TrieNode::isEnd = 0
+ *                      TridNode::letters[0-26] = nullptr
+ *                      TrieNode::words = 0
  * 
  * DESTRUCTOR:
  * ~Trie()
- *      Postcondition: //* DOCUMENTATION NEEDED
+ *      Postcondition: no action: use Trie::~() takes care of deleting interior TrieNodes
  * 
  * INFORMATION: FUNCTIONS:
  * TrieNode* getLetter(int i)
@@ -58,27 +61,27 @@
  * */
 #pragma once
 class TrieNode{
-    public:
-    TrieNode();
+    public:                                         //-------------------------------------------------------------------
+    TrieNode();                                     //initializes the node
 
-    TrieNode* getLetter(int i);
+    TrieNode* getLetter(int i);                     //returns the pointer to the letter that corrasponds with index i
 
-    int getWordsAt();
+    int getWordsAt();                               //returns the number of words in subtree of this node
 
-    bool isEndOfWord();
+    bool isEndOfWord();                             //returns if this node marks the end of a word
 
-    void markAsEnd();
+    void markAsEnd();                               //changes this node as now marking the end of a word
 
-    void addWordToSubtree();
+    void addWordToSubtree();                        //increases amount of words contained in this subtree by 1
 
-    bool checkOcupation(char checkFor);
+    bool checkOcupation(char checkFor);             //checks if the pointer for the corrasponding letter is !nullptr and return true it is occupied or false if nullptr
 
-    TrieNode* getPToLetter(char letter);
+    TrieNode* getPToLetter(char letter);            //returns the pointer value in this node to the input letter
 
-    void addNodeAt(char addAt, TrieNode* toAdd);
+    void addNodeAt(char addAt, TrieNode* toAdd);    //adds addNodeAt().toAdd to this node at letter pointer matching with addAt
 
-    private:
-    bool isEnd;
-    TrieNode* letters[26];              //syntax help obtained from family member
-    int words;                   // number of words in the subtree (inclusive of node)
+    private:                                        //-------------------------------------------------------------------
+    bool isEnd;                                     //if this node marks the end of a word
+    TrieNode* letters[26];                          //the pointers to all the letter nodes of this node                             /syntax help obtained from family member
+    int words;                                      //number of words in this nodes subtree (aka, number of isEnd == true markers)  / number of words in the subtree (inclusive of node)
 };
