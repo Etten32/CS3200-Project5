@@ -21,6 +21,8 @@ int Trie::getSize(){//get the size or number of nodes in the Trie
 }                                                  
 
 bool Trie::find(string toFind){//find if a given word exists in the Trie
+    //in case root has been comprimised
+    if(rootCleared) return false;
     return this->findH(toFind, this->root);
 }                                       
 
@@ -53,7 +55,8 @@ vector<string> Trie::complete(string wordPart){//function to return a vector of 
 
 bool Trie::insert(string toInsert){//function to insert a word into the Trie
     // if root is not cleared, call recursive insert, else skip as there is no root to insert at
-    if(!rootCleared) return this->insertH(toInsert, root);
+    if(rootCleared) return false;
+    return this->insertH(toInsert, root);
 }                                   
 
 void Trie::clearFrom(TrieNode* nodeAt){//recursive function to delete all nodes below this one non-inclusive
@@ -73,6 +76,17 @@ void Trie::clearFrom(TrieNode* nodeAt){//recursive function to delete all nodes 
 }                              
 
 bool Trie::findH(string toFind, TrieNode* nodeAt){//recursive helper function for Trie::find()
+    // Base Case-0: nodeAt is null, indicating value cannot be found, return false
+    if(nodeAt == nullptr) return false;
+
+    // Base Case-1: toFind is empty, return true or false depending on if nodeAt marks the end of a word
+    if(toFind.size() == 0) return nodeAt->isEndOfWord();
+
+    // Recursive Case-0: word not found yet and toFind has only one letter, continue along Trie in search
+    if(toFind.size() == 1) return findH("", nodeAt->getPToLetter(toFind[0]));
+
+    // Recursive Case-1: word not found yet and toFind has more than one letter, continue along Trie in search
+    return findH(toFind.substr(1,toFind.size() - 1), nodeAt->getPToLetter(toFind[0]));
 
 }                    
 

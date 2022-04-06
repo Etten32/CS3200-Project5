@@ -21,6 +21,8 @@ class TestHarness{
         TestHarness::testCompleteCount();
         cout << "==================================================" << endl << endl;
         TestHarness::testComplete();
+        cout << "==================================================" << endl << endl;
+        TestHarness::testFind();
 
     }
     private:
@@ -31,6 +33,7 @@ class TestHarness{
         Trie* testTrie = new Trie();
         testTrie->outputTrie(cout);
         cout << endl << endl;
+        delete(testTrie);
     }
     void static testInsert(){
         // test Trie::insert()
@@ -190,6 +193,37 @@ class TestHarness{
         cout << endl;
 
         cout << endl;
+        delete(testTrie);
+    }
+    void static testFind(){
+        // test Trie::find()
+        cout << "TESTING FIND()" << endl;
+        cout << " --- TESTING ON EMPTY TREE --- " << endl;
+        Trie* testTrie = new Trie();
+        cout << "EXPECTED: 0" << endl;
+        cout << "RECIEVED: " << testTrie->find("a") << endl;
+
+        cout << " --- TEST-0: EXISTING NODE, NON-WORD --- " << endl;
+        testTrie->insert("a");
+        testTrie->insert("an");
+        testTrie->insert("anne");
+        testTrie->insert("app");
+        testTrie->insert("alp");
+        cout << "EXPECTED: 0" << endl;
+        cout << "RECIEVED: " << testTrie->find("al") << endl;
+
+        cout << " --- TEST-1: NON-NODE, NON-WORD --- " << endl;
+        cout << "EXPECTED: 0" << endl;
+        cout << "RECIEVED: " << testTrie->find("alpha") << endl;
+
+        cout << " --- TEST-2: EXISTING NODE, EXISTING EDGE WORD --- " << endl;
+        cout << "EXPECTED: 1" << endl;
+        cout << "RECIEVED: " << testTrie->find("anne") << endl;
+
+        cout << " --- TEST-3: EXISTING NODE, EXISTING INTERIOR WORD --- " << endl;
+        cout << "EXPECTED: 1" << endl;
+        cout << "RECIEVED: " << testTrie->find("an") << endl;
+
         delete(testTrie);
     }
 };
