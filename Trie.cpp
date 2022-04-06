@@ -36,7 +36,19 @@ int Trie::completeCount(string wordPart){//function to count the number of words
 }                             
 
 vector<string> Trie::complete(string wordPart){//function to return a vector of words that start with given prefix
-
+    // if root is compromised return an empty vector
+    if(rootCleared) return vector<string>();
+    
+    // go to place in trie to add words to vector
+    TrieNode* nodeAt = this->root;
+    string appender = wordPart;
+    while(nodeAt != nullptr && wordPart.size() != 0){
+        // go to first letter node
+        nodeAt = nodeAt->getPToLetter(wordPart[0]);
+        wordPart = wordPart.substr(1,wordPart.size() - 1);
+    }
+    if(nodeAt != nullptr) return completeH(appender, nodeAt);
+    else return vector<string>();
 }                       
 
 bool Trie::insert(string toInsert){//function to insert a word into the Trie
@@ -64,8 +76,20 @@ bool Trie::findH(string toFind, TrieNode* nodeAt){//recursive helper function fo
 
 }                    
 
-vector<string> Trie::completeH(string wordPart, TrieNode* nodeAt){//recursive helper function for Trie::complete()
+vector<string> Trie::completeH(string appender, TrieNode* nodeAt){//recursive helper function for Trie::complete()
+    //Base Case: node is null, return an empty vector
+    if(nodeAt == nullptr) return vector<string>();
 
+    //Recursive Case: add this word to list (if it is a word) and recursively call and add words from returned list to this list
+    vector<string> toReturn = vector<string>();
+    if(nodeAt->isEndOfWord()) toReturn.push_back(appender);
+    //go through each letter and call completeH on it
+    for(char letter = 'a'; letter <= 'z'; letter++){
+        vector<string> fromReturn = completeH(appender + letter, nodeAt->getPToLetter(letter));
+        //add all returned results 
+        for(int i = 0; i < fromReturn.size(); i++) toReturn.push_back(fromReturn[i]);
+    }
+    return toReturn;
 }    
 
 bool Trie::insertH(string toInsert, TrieNode* nodeAt){//recursive helper function for Trie::insert()

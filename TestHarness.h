@@ -20,6 +20,8 @@ class TestHarness{
         //cout << "==================================================" << endl << endl;
         TestHarness::testCompleteCount();
         cout << "==================================================" << endl << endl;
+        TestHarness::testComplete();
+
     }
     private:
     void static testConstructor(){
@@ -140,5 +142,54 @@ class TestHarness{
         cout << "Recieved: " << testTrie->completeCount("a") << endl;
 
         cout << endl;
+        delete(testTrie);
+    }
+    void static testComplete(){
+        Trie* testTrie = new Trie();
+
+        cout << "TESTING COMPLETE()" << endl;
+
+        // testing Trie::complete()
+        testTrie->insert("a");
+        testTrie->insert("an");
+        testTrie->insert("ant");
+        testTrie->insert("anti");
+
+        cout << " --- TEST-0: CALLING COMPLETE --- " << endl;
+        cout  << "EXPECTED: v v v" << endl
+            << "ant" << endl
+            << "anti" << endl;
+        cout << endl << "RECIEVED: v v v" << endl;
+        vector<string> store = testTrie->complete("ant");
+        for(int i = 0; i < store.size(); i++) cout << store[i] << endl;
+        cout << endl;
+
+        testTrie->insert("anteater");
+        cout << " --- TEST-1: CALLING COMPLETE --- " << endl;
+        cout << "EXPECTED: v v v" << endl
+            << "ant" << endl
+            << "anti" << endl
+            << "anteater" << endl;
+        cout << endl << "RECIEVED: v v v" << endl;
+        store = testTrie->complete("ant");
+        for(int i = 0; i < store.size(); i++) cout << store[i] << endl;
+        cout << endl;
+
+        testTrie->insert("alps");
+        cout << " --- TEST-2: CALLING COMPLETE --- " << endl;
+        cout << "EXPECTED: v v v" << endl
+            << "a" << endl
+            << "alps" << endl
+            << "an" << endl
+            << "ant" << endl
+            << "anteater" << endl
+            << "anti" << endl;
+        cout << endl << "RECIEVED: v v v" << endl;
+        store = testTrie->complete("a");
+        for(int i = 0; i < store.size(); i++) cout << store[i] << endl;
+        cout << endl;
+
+        cout << endl;
+        delete(testTrie);
     }
 };

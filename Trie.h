@@ -52,7 +52,7 @@
  * bool findH(string toFind, TrieNode* nodeAt)
  *      Postcondition: //* DOCUMENTATION NEEDED
  * 
- * vector<string> completeH(string wordPart, TrieNode* nodeAt) ///USE THIS->VECTOR + RECURSIVE VECTOR TO GET VECTOR
+ * vector<string> completeH(string appender, TrieNode* nodeAt) ///USE THIS->VECTOR + RECURSIVE VECTOR TO GET VECTOR
  *      Postcondition: //* DOCUMENTATION NEEDED
  * 
  * MUTATION: FUNCTIONS:
@@ -103,7 +103,7 @@ class Trie{
     private:                                                        //-------------------------------------------------------------------
     bool findH(string toFind, TrieNode* nodeAt);                    //recursive helper function for Trie::find()
 
-    vector<string> completeH(string wordPart, TrieNode* nodeAt);    //recursive helper function for Trie::complete()
+    vector<string> completeH(string appender, TrieNode* nodeAt);    //recursive helper function for Trie::complete()
 
     bool insertH(string toFind, TrieNode* nodeAt);                  //recursive helper function for Trie::insert()
     
