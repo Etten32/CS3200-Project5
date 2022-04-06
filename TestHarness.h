@@ -7,6 +7,7 @@ using namespace std;
 
 class TestHarness{
     public:
+    //main testing method
     void static testTries(){
         // comment any one to remove testing
         cout << "==================================================" << endl << endl;
@@ -16,7 +17,7 @@ class TestHarness{
         cout << "==================================================" << endl << endl;
         TestHarness::testInsert();
         cout << "==================================================" << endl << endl;
-        //TestHarness::testClear();
+        //TestHarness::testClear();                                                     //make Trie->root variable public in order to test
         //cout << "==================================================" << endl << endl;
         TestHarness::testCompleteCount();
         cout << "==================================================" << endl << endl;
@@ -26,6 +27,7 @@ class TestHarness{
 
     }
     private:
+    //individual testing methods (refer to output text and names for functionings)
     void static testConstructor(){
         // test Trie::Trie()
         cout << "TESTING CONSTRUCTOR" << endl;
@@ -35,6 +37,7 @@ class TestHarness{
         cout << endl << endl;
         delete(testTrie);
     }
+    
     void static testInsert(){
         // test Trie::insert()
         cout << "TESTING INSERT" << endl;
@@ -72,6 +75,7 @@ class TestHarness{
         cout << endl << endl;
         delete(testTrie);
     }
+    
     void static testGetters(){
         Trie* testTrie0 = new Trie();
         Trie* testTrie1 = new Trie();
@@ -101,6 +105,7 @@ class TestHarness{
         delete(testTrie0);
         delete(testTrie1);
     }
+    
     void static testClear(){
         // testing Trie::clear()
         Trie* testTrie = new Trie();
@@ -110,7 +115,7 @@ class TestHarness{
         testTrie->insert("a");
         testTrie->insert("i");
         cout << "3 NODES: " << testTrie->getSize() << endl;
-        //testTrie->clearFrom(testTrie->root);
+        //testTrie->clearFrom(testTrie->root);                                          //make Trie->root variable public in order to test
         cout << "0 NODES: " << testTrie->getSize() << endl;
         testTrie->insert("test");
         cout << "0 NODES: " << testTrie->getSize() << endl;
@@ -119,6 +124,7 @@ class TestHarness{
 
         delete(testTrie);
     }
+    
     void static testCompleteCount(){
         Trie* testTrie = new Trie();
 
@@ -147,6 +153,7 @@ class TestHarness{
         cout << endl;
         delete(testTrie);
     }
+    
     void static testComplete(){
         Trie* testTrie = new Trie();
 
@@ -195,6 +202,7 @@ class TestHarness{
         cout << endl;
         delete(testTrie);
     }
+    
     void static testFind(){
         // test Trie::find()
         cout << "TESTING FIND()" << endl;

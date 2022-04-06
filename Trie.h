@@ -98,7 +98,7 @@ class Trie{
 
     bool insert(string toInsert);                                   //function to insert a word into the Trie
 
-    void clearFrom(TrieNode* nodeAt);                              //recursive function to delete all nodes below this one non-inclusive
+    void clearFrom(TrieNode* nodeAt);                               //recursive function to delete all nodes below this one non-inclusive
 
     private:                                                        //-------------------------------------------------------------------
     bool findH(string toFind, TrieNode* nodeAt);                    //recursive helper function for Trie::find()
@@ -110,7 +110,7 @@ class Trie{
     ;                                                               //-------------------------------------------------------------------
     TrieNode* root;                                                 //baseNode of Trie
 
-    //int words;                                                      //number of words in Trie     //* DEPRECATED
+    //int words;                                                    //number of words in Trie     //* DEPRECATED
     
     int nodes;                                                      //number of nodes in Trie
 
